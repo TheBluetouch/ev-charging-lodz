@@ -1,0 +1,38 @@
+#!/bin/bash
+# Instrukcje deployment na GitHub Pages
+
+echo "==================================="
+echo "DEPLOYMENT NA GITHUB PAGES"
+echo "==================================="
+echo ""
+echo "1. Stwórz repo na GitHub: https://github.com/new"
+echo "   - Nazwa: ev-charging-lodz"
+echo "   - Public: TAK"
+echo "   - NIE dodawaj README/gitignore"
+echo ""
+echo "2. Po stworzeniu repo, uruchom te komendy:"
+echo ""
+echo "   ZMIEŃ 'YOUR-USERNAME' na swoją nazwę użytkownika GitHub!"
+echo ""
+echo "   git remote add origin https://github.com/YOUR-USERNAME/ev-charging-lodz.git"
+echo "   git branch -M main"
+echo "   git push -u origin main"
+echo ""
+echo "3. Włącz GitHub Pages:"
+echo "   - Idź do: Settings -> Pages"
+echo "   - Source: Deploy from a branch"
+echo "   - Branch: main"
+echo "   - Folder: / (root)"
+echo "   - Save"
+echo ""
+echo "4. Po 1-2 minutach strona będzie dostępna:"
+echo "   https://YOUR-USERNAME.github.io/ev-charging-lodz/"
+echo ""
+echo "==================================="
+echo ""
+echo "Obecny status Git:"
+git status
+echo ""
+echo "Historia commitów:"
+git log --oneline -5
+
