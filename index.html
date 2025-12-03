@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacje Ładowania EV - Łódź</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    
+    <!-- Font Awesome dla ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-charging-station"></i> Stacje Ładowania EV - Łódź</h1>
+            <button id="toggle-sidebar" class="btn-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Ładowanie danych...</p>
+            </div>
+
+            <!-- Filters Section -->
+            <section id="filters-section" class="filters-section" style="display: none;">
+                <h2>Filtry</h2>
+                
+                <!-- Open Now -->
+                <div class="filter-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="filter-open-now">
+                        <span>Tylko otwarte teraz</span>
+                    </label>
+                </div>
+
+                <!-- Power Range -->
+                <div class="filter-group">
+                    <label>Moc ładowania (kW)</label>
+                    <div class="power-filters">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="filter-ac" checked>
+                            <span>AC (≤22 kW)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="filter-fast" checked>
+                            <span>Fast (23-49 kW)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="filter-ultra" checked>
+                            <span>Ultra-Fast (≥50 kW)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Connector Type -->
+                <div class="filter-group">
+                    <label for="filter-connector">Typ złącza</label>
+                    <select id="filter-connector" multiple>
+                        <option value="all" selected>Wszystkie</option>
+                        <!-- Będzie wypełnione dynamicznie -->
+                    </select>
+                </div>
+
+                <!-- Operator -->
+                <div class="filter-group">
+                    <label for="filter-operator">Operator</label>
+                    <select id="filter-operator">
+                        <option value="all">Wszyscy</option>
+                        <!-- Będzie wypełnione dynamicznie -->
+                    </select>
+                </div>
+
+                <!-- Reset Filters -->
+                <button id="reset-filters" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i> Resetuj filtry
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section" style="display: none;">
+                <h2>
+                    Stacje (<span id="results-count">0</span>)
+                </h2>
+                <div id="stations-list" class="stations-list">
+                    <!-- Lista będzie wypełniona dynamicznie -->
+                </div>
+            </section>
+
+            <!-- Legend -->
+            <section class="legend">
+                <h3>Legenda</h3>
+                <div class="legend-item">
+                    <span class="marker-icon green"></span> AC ≤22 kW
+                </div>
+                <div class="legend-item">
+                    <span class="marker-icon orange"></span> Fast 23-49 kW
+                </div>
+                <div class="legend-item">
+                    <span class="marker-icon red"></span> Ultra-Fast ≥50 kW
+                </div>
+            </section>
+        </aside>
+
+        <!-- Map Container -->
+        <main class="map-container">
+            <div id="map"></div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/mapManager.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
